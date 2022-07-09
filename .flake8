@@ -1,0 +1,16 @@
+[flake8]
+select = C,E,F,W,B,B950
+ignore = E203, E501, W503
+max-line-length = 80
+
+exclude =
+    .git
+    .venv
+    __pycache__
+    python-sc2
+    jsonpickle
+    sc2pathlib
+    Bots
+    games
+    publish
+    data

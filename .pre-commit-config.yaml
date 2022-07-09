@@ -1,0 +1,50 @@
+# .pre-commit-config.yaml
+# ========================
+#
+# pre-commit clean
+# pre-commit install
+# pre-commit install-hooks
+#
+# precommit hooks installation
+#
+# - pre-commit autoupdate
+#
+# - pre-commit run black
+#
+# continuous integration
+# ======================
+#
+# - pre-commit run --all-files
+#
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+      #- id: check-yaml
+      - id: end-of-file-fixer
+      - id: requirements-txt-fixer
+      - id: no-commit-to-branch
+        args: [--branch, main]
+      - id: trailing-whitespace
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+      - id: black
+        exclude: ^migrations/
+        language_version: python3.10
+  - repo: https://github.com/asottile/seed-isort-config
+    rev: v2.2.0
+    hooks:
+      - id: seed-isort-config
+  - repo: https://github.com/timothycrosley/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.9.2
+    hooks:
+      - id: flake8
+        exclude: "[a-zA-Z]*/(migrations)/(.)*"
+        additional_dependencies: [flake8-bugbear]
