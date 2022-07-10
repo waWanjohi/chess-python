@@ -28,7 +28,7 @@ class Move(BaseGameModel):
     Will record a move's initial and final location.
     ---
 
-    `color: bool`: The color of the moved piece
+    `color: str`: The color of the moved piece
 
     `from_pos: str`: Initial position eg. "[4, 3]"
     
@@ -37,7 +37,7 @@ class Move(BaseGameModel):
 
     from_pos = models.CharField(max_length=10)
     to_pos = models.CharField(max_length=10)
-    color = models.BooleanField()
+    color = models.CharField(max_length=10)
 
 
 class Capture(BaseGameModel):
@@ -45,11 +45,11 @@ class Capture(BaseGameModel):
     Will keep track of captured pieces of any game.
     ---
 
-    `color: bool`: The color of the captured piece (True for white)
+    `color: str`: The color of the captured piece
     """
 
     captured_piece = models.CharField(max_length=10)
-    color = models.BooleanField()
+    color = models.CharField(max_length=10)
 
 
 class Game(models.Model):
@@ -85,7 +85,7 @@ class Game(models.Model):
     """
 
     game_id = models.CharField(
-        primary_key=True, default=uuid.uuid4, editable=False, max_length=200
+        primary_key=True, default=uuid.uuid4, editable=True, max_length=200
     )
     moves = models.ManyToManyField(Move)
     captures = models.ManyToManyField(Capture)

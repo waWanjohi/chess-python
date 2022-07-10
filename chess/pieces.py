@@ -55,7 +55,7 @@ class Rook(ChessPiece):
             return rooks_moves(board=board, starting_pos=starting_position, ending_pos=finishing_position)
 
         # If move doesn't check,
-        create_message(ILLEGAL_MOVE)
+        create_message(detail=ILLEGAL_MOVE, messages=board.messages)
         print(ILLEGAL_MOVE)
         return False
 
@@ -82,7 +82,7 @@ class Knight(ChessPiece):
         if abs(starting_position[1] - finishing_position[1]) == 1 and \
             abs(starting_position[1] - finishing_position[1]) == 2:
             return True
-        create_message(ILLEGAL_MOVE)
+        create_message(detail=ILLEGAL_MOVE, messages=board.messages)
         print(ILLEGAL_MOVE)
         return False
 
@@ -134,7 +134,7 @@ class King(ChessPiece):
                 (starting_position[1] - finishing_position[1] == 0):
                 return True
         
-        create_message(ILLEGAL_MOVE)
+        create_message(detail=ILLEGAL_MOVE, messages=board.messages)
         print(ILLEGAL_MOVE)
         return False
 
@@ -164,7 +164,7 @@ class Pawn(ChessPiece):
                 if board.board[finishing_position[0]][finishing_position[1]] != None:
                     self.first_move = False
                     return True
-                create_message(ILLEGAL_MOVE)
+                create_message(detail=ILLEGAL_MOVE, messages=board.messages)
                 print(ILLEGAL_MOVE)
                 return False
 
@@ -175,7 +175,7 @@ class Pawn(ChessPiece):
                      (starting_position[0] - finishing_position[0] == 1):
                     for pos in range(starting_position[0] - 1, finishing_position[0] - 1, -1):
                         if board.board[pos][starting_position[1]] != None:
-                            create_message(ILLEGAL_MOVE)
+                            create_message(detail=ILLEGAL_MOVE, messages=board.messages)
                             print(BLOCKED_MOVE)
                             return False
 
@@ -203,7 +203,7 @@ class Pawn(ChessPiece):
                 if ((finishing_position[0] - starting_position[0] == 2) and self.first_move) or (finishing_position[0] - starting_position[0] == 1):
                     for pos in range(starting_position[0] + 1, finishing_position[0] + 1):
                         if board.board[pos][starting_position[1]] != None:
-                            create_message(ILLEGAL_MOVE)
+                            create_message(detail=ILLEGAL_MOVE, messages=board.messages)
                             print(ILLEGAL_MOVE)
                             return False
 
@@ -212,11 +212,11 @@ class Pawn(ChessPiece):
                     self.first_move = False
                     return True
 
-                create_message(ILLEGAL_MOVE)
+                create_message(detail=ILLEGAL_MOVE, messages=board.messages)
                 print(ILLEGAL_MOVE)
                 return False
             
-            create_message(ILLEGAL_MOVE)
+            create_message(detail=ILLEGAL_MOVE, messages=board.messages)
             print(ILLEGAL_MOVE)
             return False
 

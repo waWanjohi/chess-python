@@ -1,4 +1,5 @@
 from chess.constants import BLOCKED_MOVE, ILLEGAL_MOVE
+from chess.services import create_message
 
 
 def rooks_moves(board, starting_pos, ending_pos) -> bool:
@@ -25,6 +26,7 @@ def rooks_moves(board, starting_pos, ending_pos) -> bool:
             # If there's a piece on that place, don't place the rook
             if board.board[starting_pos[0]][position] != None:
                 print(BLOCKED_MOVE)
+                create_message(detail=BLOCKED_MOVE, messages=board.messages)
                 return False
         return True
 
@@ -37,6 +39,7 @@ def rooks_moves(board, starting_pos, ending_pos) -> bool:
         for position in range(left + 1, right):
             if board.board[position][starting_pos[1]] != None:
                 print(BLOCKED_MOVE)
+                create_message(detail=BLOCKED_MOVE, messages=board.messages)
                 return False
         
         return True
@@ -58,6 +61,7 @@ def bishops_moves(board, starting_pos, finishing_pos) -> bool:
         starting_pos[1] - finishing_pos[1]
     ):
         print(ILLEGAL_MOVE)
+        create_message(detail=ILLEGAL_MOVE, messages=board.messages)
         return False
 
     x_axis = 1 if finishing_pos[0] - starting_pos[0] > 0 else -1

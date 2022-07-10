@@ -130,11 +130,11 @@ class ChessEngine:
         self.board = ChessBoard()
         self.moves_history = []
         self.captures = []
-
+        self.messages = []
 
     def make_move(self, initial_pos, destination):
         if self.board.board[initial_pos[0]][initial_pos[1]] == None: # Don't move  blank
-            create_message(NO_PIECE_MOVED)
+            create_message(detail=NO_PIECE_MOVED, messages=self.messages)
             print(NO_PIECE_MOVED)
             return
 
@@ -142,7 +142,7 @@ class ChessEngine:
         # In case you accidentally pick an opponent's piece
         selected_piece = self.board.board[initial_pos[0]][initial_pos[1]]
         if self.white_to_play != selected_piece.color:
-            create_message(PIECE_RESTRAINED)
+            create_message(detail=PIECE_RESTRAINED, messages=self.messages)
             print(PIECE_RESTRAINED)
             return
 
@@ -151,8 +151,8 @@ class ChessEngine:
         target_piece = self.board.board[destination[0]][destination[1]]
         is_target = target_piece != None
 
-        if is_target and (self.board[initial_pos[0]][initial_pos[1]].color == target_piece.color):
-            create_message(PATH_BLOCKED)
+        if is_target and (self.board.board[initial_pos[0]][initial_pos[1]].color == target_piece.color):
+            create_message(detail=PATH_BLOCKED, messages=self.messages)
             print(PATH_BLOCKED)
             return
 
@@ -168,11 +168,11 @@ class ChessEngine:
         self.moves_history.append([[initial_pos[0], initial_pos[1]], [destination[0], destination[1]]])
 
         self.board.board[initial_pos[0]][initial_pos[1]] = None
-        print(f"{WHITE if selected_piece.color else BLACK}{selected_piece} moved.")
-        create_message(message)
+        message = f"{WHITE if selected_piece.color else BLACK}{selected_piece} moved."
+        print(message)
+        create_message(detail=message, messages=self.messages)
 
 
         # Switch players
         self.white_to_play = not self.white_to_play
         message = "White's turn" if self.white_to_play else "Black's turn"
-        create_message(message)

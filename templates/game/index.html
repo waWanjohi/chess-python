@@ -1,0 +1,90 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Chess Test UI</h1>
+
+Enter a move, separated by commas, to send a move: eg: From: a1 To: a3, Just
+type a1a3
+
+<form method="post" id="form">
+  <input type="text" id="move" name="" />
+  <input type="submit" value="Send" />
+</form>
+<div id="message-log"></div>
+
+{% endblock %} {% block scripts %}
+
+<script type="text/javascript">
+  // Valid chess letters
+  const letters = ["a", "b", "c", "d", "e", "f", "g"];
+
+  // Create connection
+  let url = `ws://${window.location.host}/ws/play/`;
+  const chessSocket = new WebSocket(url);
+
+  // Handle incoming messages by type
+  chessSocket.onmessage = function (e) {
+    let data = JSON.parse(e.data);
+
+    // ECHO DATA
+    if (data.type == "game") {
+      let messages = document.getElementById("message-log");
+      messages.insertAdjacentHTML(
+                "beforeend",
+                // Insert newest message
+                `<div><p>${data.messages.at(-1)}</p></div>`
+            );
+        
+    }
+
+    if (data.type == "echo") {
+      console.log("Game Message: ", data);
+    }
+
+    if (data.type == "initial_messages") {
+      console.log("Initial Message: ", data.message);
+    }
+  };
+
+  // Handle form submissions
+  let form = document.getElementById("form");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    let message = e.target.move.value;
+
+    // Remove spaces
+    message = message.replace(/\s+/g, "");
+
+    // Don't allow more than four characters
+    if (message.length != 4) {
+      alert(`${message} Not a valid move`);
+      return;
+    }
+
+    formattedMessage = message.toLowerCase();
+
+    // letters
+    if (!letters.includes((formattedMessage[0])) || !letters.includes(formattedMessage[2])) {
+        alert("Enter a valid move!");
+        return;
+    }
+
+    // numbers
+    if (formattedMessage[1] > 8 || formattedMessage[3] > 8) {
+        alert(`${formattedMessage[1]} ${formattedMessage[3]} Number not on chess board!`);
+        return;
+    }
+
+    message = {
+        type: "move",
+        from: [formattedMessage[0], formattedMessage[1]],
+        to: [formattedMessage[2], formattedMessage[3]]
+    }
+
+    chessSocket.send(
+      JSON.stringify({
+        message: message,
+      })
+    );
+  });
+</script>
+{% endblock scripts %}
