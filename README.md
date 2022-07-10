@@ -132,4 +132,3 @@ python manage.py runserver
 ```
 
 ## Now you can write bugs :)
-

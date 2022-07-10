@@ -1,6 +1,3 @@
-from typing import List
-
-
 def create_message(detail, messages):
     """
     This is a service method to create any kind of message within the game.

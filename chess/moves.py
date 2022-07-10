@@ -11,7 +11,7 @@ def rooks_moves(board, starting_pos, ending_pos) -> bool:
     `starting_pos` -> the initial position on the board
 
     `ending_pos` -> the target position on the board
-    
+
     `board` -> the instance of the board
 
     """
@@ -24,7 +24,7 @@ def rooks_moves(board, starting_pos, ending_pos) -> bool:
 
         for position in range(down + 1, up):
             # If there's a piece on that place, don't place the rook
-            if board.board[starting_pos[0]][position] != None:
+            if board.board[starting_pos[0]][position] is not None:
                 print(BLOCKED_MOVE)
                 create_message(detail=BLOCKED_MOVE, messages=board.messages)
                 return False
@@ -37,18 +37,18 @@ def rooks_moves(board, starting_pos, ending_pos) -> bool:
 
         # This check prevents the -1 list indexing possibility
         for position in range(left + 1, right):
-            if board.board[position][starting_pos[1]] != None:
+            if board.board[position][starting_pos[1]] is not None:
                 print(BLOCKED_MOVE)
                 create_message(detail=BLOCKED_MOVE, messages=board.messages)
                 return False
-        
+
         return True
 
 
 def bishops_moves(board, starting_pos, finishing_pos) -> bool:
     """
     Bishops move vertically, therefore we need to track:
-    
+
     1. The x-axis
     2. The y-axis
 
@@ -76,7 +76,7 @@ def bishops_moves(board, starting_pos, finishing_pos) -> bool:
 
     while movement_possible:
         # Check if the intended slot has a piece already
-        if board.board[x_position][y_position] != None:
+        if board.board[x_position][y_position] is not None:
             print(BLOCKED_MOVE + f" [{x_position}, {y_position}]")
             return False
 

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from apps.game.models import Game, Move, Capture
+
+from apps.game.models import Capture, Game, Move
 
 
 @admin.register(Game)

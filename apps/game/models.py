@@ -1,5 +1,6 @@
-from django.db import models
 import uuid
+
+from django.db import models
 
 
 class BaseGameModel(models.Model):
@@ -31,7 +32,7 @@ class Move(BaseGameModel):
     `color: str`: The color of the moved piece
 
     `from_pos: str`: Initial position eg. "[4, 3]"
-    
+
     `to_pos: str`: Destination position eg. "[3, 3]"
     """
 
@@ -62,9 +63,9 @@ class Game(models.Model):
     A game has two players, moves and captures
 
     `moves: [Move]`: A list containing all the moves
-    
+
     `captures: [Capture]`: A list of all captures within the board
-    
+
     `game_id: uuid`: A unique UUID Field for each game
 
     `winner: str`: The color of the winner (White/Black)
@@ -72,7 +73,7 @@ class Game(models.Model):
     Properties
     ---
     `@moves_count: int`: Get total moves within the game
-    
+
     `@captures_count: int`: Get total captures within the game
 
 

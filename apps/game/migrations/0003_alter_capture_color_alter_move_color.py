@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('game', '0002_capture_color_game_winner_move_color'),
+        ("game", "0002_capture_color_game_winner_move_color"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='capture',
-            name='color',
+            model_name="capture",
+            name="color",
             field=models.BooleanField(),
         ),
         migrations.AlterField(
-            model_name='move',
-            name='color',
+            model_name="move",
+            name="color",
             field=models.BooleanField(),
         ),
     ]

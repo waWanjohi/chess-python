@@ -20,12 +20,12 @@ BLACK = "b"
 """
   Create enums for the pieces, both white or black
 """
-W_PAWN = f"{WHITE}{PAWN}" #      'wP'
+W_PAWN = f"{WHITE}{PAWN}"  # 'wP'
 W_KNIGHT = f"{WHITE}{KNIGHT}"
 W_ROOK = f"{WHITE}{ROOK}"
 W_BISHOP = f"{WHITE}{BISHOP}"
 W_QUEEN = f"{WHITE}{QUEEN}"
-W_KING = f"{WHITE}{KING}" 
+W_KING = f"{WHITE}{KING}"
 
 B_PAWN = f"{BLACK}{PAWN}"
 B_KNIGHT = f"{BLACK}{KNIGHT}"
@@ -35,7 +35,7 @@ B_QUEEN = f"{BLACK}{QUEEN}"
 B_KING = f"{BLACK}{KING}"
 
 # for an empty space
-EMPTY = f"{BLANK}{BLANK}"     # '__'
+EMPTY = f"{BLANK}{BLANK}"  # '__'
 
 
 # Ranks
@@ -70,7 +70,7 @@ COLUMNS_TO_FILES = {value: key for key, value in FILES_TO_COLUMNS.items()}
 
 ROW_NAMES = {ONE: 0, TWO: 1, THREE: 2, FOUR: 3, FIVE: 4, SIX: 5, SEVEN: 6, EIGHT: 7}
 
-# Messages 
+# Messages
 ILLEGAL_MOVE = "Illegal Move!"
 BLOCKED_MOVE = "Move is blocked!"
 NO_PIECE_MOVED = "No piece Moved!"

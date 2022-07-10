@@ -8,9 +8,9 @@ class User(AbstractUser):
 
     Empty for now as there are no users required
 
-    In case we need to change anything later.    
+    In case we need to change anything later.
     AbstractUser will allow for that to happen.
 
     """
 
-    pass 
+    pass

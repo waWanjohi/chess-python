@@ -1,42 +1,40 @@
-from chess.constants import *  # noqa
+from chess.constants import BLACK, NO_PIECE_MOVED, PATH_BLOCKED, PIECE_RESTRAINED, WHITE
 from chess.pieces import Bishop, King, Knight, Pawn, Queen, Rook
 from chess.services import create_message
 
 
-
-
 class ChessBoard:
     """
-        This places the pieces on the board matrix.
-        We'll use a 2-D List to do draw the pieces on the board
+    This places the pieces on the board matrix.
+    We'll use a 2-D List to do draw the pieces on the board
 
 
-        ### THE STRUCTURE OF THE BOARD
-        `board: List[List[Piece]]`: The board object
-        `initialize()`: To load the board and place `Piece`s on it
-        `move`: A move, takes two arguments, `from_pos` and `to_pos`, each an `Iterable`
-        
-        ``` py
-              [1]       [2]      [3]     [4]      [5]      [6]      [7]      [8]
+    ### THE STRUCTURE OF THE BOARD
+    `board: List[List[Piece]]`: The board object
+    `initialize()`: To load the board and place `Piece`s on it
+    `move`: A move, takes two arguments, `from_pos` and `to_pos`, each an `Iterable`
 
-        [H]  ['wR',    'wN',    'wB',    'wQ',    'wK',    'wB',    'wN',    'wR']
+    ``` py
+          [1]       [2]      [3]     [4]      [5]      [6]      [7]      [8]
 
-        [G]  ['wP',    'wP',    'wP',    'wP',    'wP',    'wP',    'wP',    'wP']
+    [H]  ['wR',    'wN',    'wB',    'wQ',    'wK',    'wB',    'wN',    'wR']
 
-        [F]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
+    [G]  ['wP',    'wP',    'wP',    'wP',    'wP',    'wP',    'wP',    'wP']
 
-        [E]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
+    [F]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
 
-        [D]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
+    [E]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
 
-        [C]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
+    [D]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
 
-        [B]  ['bP',    'bP',    'bP',    'bP',    'bP',    'bP',    'bP',    'bP']
+    [C]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
 
-        [A]  ['bR',    'bN',    'bB',    'bQ',    'bK',    'bB',    'bN',    'bR']
-        ```
+    [B]  ['bP',    'bP',    'bP',    'bP',    'bP',    'bP',    'bP',    'bP']
 
-        
+    [A]  ['bR',    'bN',    'bB',    'bQ',    'bK',    'bB',    'bN',    'bR']
+    ```
+
+
     """
 
     def __init__(self) -> None:
@@ -50,7 +48,6 @@ class ChessBoard:
             [None, None, None, None, None, None, None, None],
             [None, None, None, None, None, None, None, None],
         ]
-
 
         # White Pieces
         self.board[7][0] = Rook(True)
@@ -66,7 +63,6 @@ class ChessBoard:
         for pos in range(8):
             self.board[6][pos] = Pawn(True)
 
-
         # Black Pieces
         self.board[0][0] = Rook(False)
         self.board[0][1] = Knight(False)
@@ -80,33 +76,6 @@ class ChessBoard:
         # Place the black pawns
         for pos in range(8):
             self.board[1][pos] = Pawn(False)
-        
-
-    def __str__(self):
-        """
-        Prints the current state of the board.
-        """
-
-        buffer = ""
-        for i in range(33):
-            buffer += "*"
-        print(buffer)
-        for i in range(len(self.board)):
-            tmp_str = "|"
-            for j in self.board[i]:
-                
-                if j == None or j.name == 'GP':
-                    tmp_str += "   |"
-                elif len(j.name) == 2:
-                    tmp_str += (" " + str(j) + "|")
-                else:
-                    tmp_str += (f" {WHITE if j.color else BLACK}" + str(j) + " |")
-            print(tmp_str)
-        buffer = ""
-        for i in range(33):
-            buffer += "*"
-        print(buffer)
-        return buffer
 
 
 class ChessEngine:
@@ -119,11 +88,10 @@ class ChessEngine:
     Methods
     -----
 
-    `move(initial_pos, destination)`: Moves a piece from initial_pos to the destination based on `is_valid_move()` of the piece.
+    `move(initial_pos, destination)`: Moves a piece from initial_pos to the destination based on `is_valid_move()` of the piece. # noqa
     `promote(position)`: Promotes a pawn once it's reached opponent's side
 
     """
-
 
     def __init__(self) -> None:
         self.white_to_play = True
@@ -133,11 +101,12 @@ class ChessEngine:
         self.messages = []
 
     def make_move(self, initial_pos, destination):
-        if self.board.board[initial_pos[0]][initial_pos[1]] == None: # Don't move  blank
+        if (
+            self.board.board[initial_pos[0]][initial_pos[1]] is None
+        ):  # Don't move  blank
             create_message(detail=NO_PIECE_MOVED, messages=self.messages)
             print(NO_PIECE_MOVED)
             return
-
 
         # In case you accidentally pick an opponent's piece
         selected_piece = self.board.board[initial_pos[0]][initial_pos[1]]
@@ -146,32 +115,33 @@ class ChessEngine:
             print(PIECE_RESTRAINED)
             return
 
-
         # Check if a piece is blocking the path
         target_piece = self.board.board[destination[0]][destination[1]]
-        is_target = target_piece != None
+        is_target = target_piece is not None
 
-        if is_target and (self.board.board[initial_pos[0]][initial_pos[1]].color == target_piece.color):
+        if is_target and (
+            self.board.board[initial_pos[0]][initial_pos[1]].color == target_piece.color
+        ):
             create_message(detail=PATH_BLOCKED, messages=self.messages)
             print(PATH_BLOCKED)
             return
 
-
         # Capture the piece
-        if target_piece != None:
+        if target_piece is not None:
             self.captures.append(target_piece)
 
         # Move the piece selected to the destination
         self.board.board[destination[0]][destination[1]] = selected_piece
 
         # log the move
-        self.moves_history.append([[initial_pos[0], initial_pos[1]], [destination[0], destination[1]]])
+        self.moves_history.append(
+            [[initial_pos[0], initial_pos[1]], [destination[0], destination[1]]]
+        )
 
         self.board.board[initial_pos[0]][initial_pos[1]] = None
         message = f"{WHITE if selected_piece.color else BLACK}{selected_piece} moved."
         print(message)
         create_message(detail=message, messages=self.messages)
-
 
         # Switch players
         self.white_to_play = not self.white_to_play
