@@ -2,7 +2,9 @@
 
 
 
-### Getting Started
+For Documentation and reference to the Game design, see docs [here](https://wawanjohi.github.io/chess-api/)
+
+### Quick Start
 - [Clone Repo](#clone-the-repo)
 - [Setup Virtual Env](#setup-virtual-env)
 - [Setup Channels](#setup-channels)
