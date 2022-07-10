@@ -17,23 +17,23 @@ class ChessBoard:
         `move`: A move, takes two arguments, `from_pos` and `to_pos`, each an `Iterable`
         
         ``` py
-              [A]       [B]        [C]     [D]      [E]      [F]      [G]      [H]
+              [1]       [2]      [3]     [4]      [5]      [6]      [7]      [8]
 
-        [8]  ['bR',    'bN',    'bB',    'bQ',    'bK',    'bB',    'bN',    'bR']
+        [H]  ['wR',    'wN',    'wB',    'wQ',    'wK',    'wB',    'wN',    'wR']
 
-        [7]  ['bP',    'bP',    'bP',    'bP',    'bP',    'bP',    'bP',    'bP']
+        [G]  ['wP',    'wP',    'wP',    'wP',    'wP',    'wP',    'wP',    'wP']
 
-        [6]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
+        [F]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
 
-        [5]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
+        [E]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
 
-        [4]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
+        [D]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
 
-        [3]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
+        [C]  ['__',    '__',    '__',    '__',    '__',    '__',    '__',    '__']
 
-        [2]  ['wP',    'wP',    'wP',    'wP',    'wP',    'wP',    'wP',    'wP']
+        [B]  ['bP',    'bP',    'bP',    'bP',    'bP',    'bP',    'bP',    'bP']
 
-        [1]  ['wR',    'wN',    'wB',    'wQ',    'wK',    'wB',    'wN',    'wR']
+        [A]  ['bR',    'bN',    'bB',    'bQ',    'bK',    'bB',    'bN',    'bR']
         ```
 
         
@@ -129,6 +129,7 @@ class ChessEngine:
         self.white_to_play = True
         self.board = ChessBoard()
         self.moves_history = []
+        self.captures = []
 
 
     def make_move(self, initial_pos, destination):
@@ -153,6 +154,10 @@ class ChessEngine:
             return
 
 
+        # Capture the piece
+        if target_piece != None:
+            self.captures.append(target_piece)
+
         # Move the piece selected to the destination
         self.board.board[destination[0]][destination[1]] = selected_piece
 
@@ -165,7 +170,3 @@ class ChessEngine:
 
         # Switch players
         self.white_to_play = not self.white_to_play
-
-
-
-    
