@@ -2,14 +2,14 @@
 
 
 
-### Contents
+### Getting Started
 - [Clone Repo](#clone-the-repo)
 - [Setup Virtual Env](#setup-virtual-env)
 - [Setup Channels](#setup-channels)
 - [Setup Database and Firebase](#setup-database-and-firebase)
 - [Setup Superuser](#setup-superuser)
 - [Running the project](#run-the-project)
-- [Conclution](#sign-up-as-an-organization-now-you-can-write-bugs)
+- [Conclusion](#sign-up-as-an-organization-now-you-can-write-bugs)
 
 
 
