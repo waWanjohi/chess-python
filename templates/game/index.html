@@ -70,7 +70,7 @@ type a1a3
 
     // numbers
     if (formattedMessage[1] > 8 || formattedMessage[3] > 8) {
-        alert(`${formattedMessage[1]} ${formattedMessage[3]} Number not on chess board!`);
+        alert(`${formattedMessage[1]} / ${formattedMessage[3]} not on chess board!`);
         return;
     }
 
@@ -85,6 +85,8 @@ type a1a3
         message: message,
       })
     );
+
+    form.reset();
   });
 </script>
 {% endblock scripts %}
