@@ -1,6 +1,6 @@
-import uuid
 from chess.constants import *  # noqa
 from chess.pieces import Bishop, King, Knight, Pawn, Queen, Rook
+from chess.services import create_message
 
 
 
@@ -133,7 +133,8 @@ class ChessEngine:
 
 
     def make_move(self, initial_pos, destination):
-        if self.board.board[initial_pos[0]][initial_pos[1]] == None:
+        if self.board.board[initial_pos[0]][initial_pos[1]] == None: # Don't move  blank
+            create_message(NO_PIECE_MOVED)
             print(NO_PIECE_MOVED)
             return
 
@@ -141,6 +142,7 @@ class ChessEngine:
         # In case you accidentally pick an opponent's piece
         selected_piece = self.board.board[initial_pos[0]][initial_pos[1]]
         if self.white_to_play != selected_piece.color:
+            create_message(PIECE_RESTRAINED)
             print(PIECE_RESTRAINED)
             return
 
@@ -150,6 +152,7 @@ class ChessEngine:
         is_target = target_piece != None
 
         if is_target and (self.board[initial_pos[0]][initial_pos[1]].color == target_piece.color):
+            create_message(PATH_BLOCKED)
             print(PATH_BLOCKED)
             return
 
@@ -166,7 +169,10 @@ class ChessEngine:
 
         self.board.board[initial_pos[0]][initial_pos[1]] = None
         print(f"{WHITE if selected_piece.color else BLACK}{selected_piece} moved.")
+        create_message(message)
 
 
         # Switch players
         self.white_to_play = not self.white_to_play
+        message = "White's turn" if self.white_to_play else "Black's turn"
+        create_message(message)
