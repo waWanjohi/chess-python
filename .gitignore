@@ -162,3 +162,7 @@ cython_debug/
 
 ### Playground files
 playground.ipynb
+
+
+### Vscode
+.vscode
