@@ -1,2 +1,0 @@
-WHITE = True
-BLACK = False

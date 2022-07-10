@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     "chess",
     "apps.accounts",
     "apps.game",
-    "django.contrib.admindocs",
 ]
 
 MIDDLEWARE = [
