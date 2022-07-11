@@ -1,4 +1,4 @@
-## A Chess Game API made with Django
+## A Chess Game backend made with Django
 
 
 
