@@ -23,7 +23,7 @@ class MovesConsumer(WebsocketConsumer):
 
     ```json
         {
-            "coordinates": {
+            "message": {
                 "start": [0, 2],
                 "end": [0, 4]
             }
