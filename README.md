@@ -135,4 +135,4 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-
+Go to [http://localhost:8000](http://localhost:8000) to ping a move!
