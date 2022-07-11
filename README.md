@@ -135,4 +135,4 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-## Now you can write bugs :)
+
