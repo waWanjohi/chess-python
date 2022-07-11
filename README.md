@@ -2,7 +2,7 @@
 
 
 
-For Documentation and reference to the Game design, see docs [here](https://wawanjohi.github.io/chess-api/)
+For Documentation and reference to the Game design, see docs [here](https://wawanjohi.github.io/chess-python/)
 
 ## This project uses [pre-commit](https://pre-commit.com/) and [black](https://pypi.org/project/black/) for formatting.
 ### Quick Start
