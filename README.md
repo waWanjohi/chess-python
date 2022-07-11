@@ -96,7 +96,7 @@ For Windows, you will either have to use Docker or other third-party ways for co
 
 [Docker](https://www.docker.com/)
 ```sh
-docker run -it --name getboda-saas-redis -d redis
+docker run -it --name chess-python-redis -d redis
 ```
 
 We'd highly recommend that you use [Memurai](https://www.memurai.com/) if you don't intend to use [Docker](https://www.docker.com/)
