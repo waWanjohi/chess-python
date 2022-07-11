@@ -57,7 +57,7 @@ You can use in-memory channel layers, but be sure to move to a production-ready 
 
 ### Setting up InMemoryChannelLayer:
 
-Add this to your Setting
+Add this to your Setting at `config/settings.py`
 
 ```py
     CHANNEL_LAYERS = {
@@ -102,7 +102,7 @@ docker run -it --name chess-python-redis -d redis
 I'd highly recommend that you use [Memurai](https://www.memurai.com/) if you don't intend to use [Docker](https://www.docker.com/)
 
 
-Add this to your settings:
+Add this to your settings at `config/settings.py`:
 
 ```py
     CHANNEL_LAYERS = {
