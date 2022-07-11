@@ -48,6 +48,7 @@ Create the environment `venv` and run this on powershell: <br>
 .\venv\Scripts\Activate.ps1
 ```
 
+While at it, copy `.env.example` to `.env` and prepopulate the values as you need to.
 
 ## Setup Channel Layers:
 
