@@ -22,15 +22,15 @@ For Documentation and reference to the Game design, see docs [here](https://wawa
 ## Clone the repo:
 with https
 ```sh
-git clone https://github.com/wawanjohi/chess-api.git
+git clone https://github.com/wawanjohi/chess-python.git
 ```
 or SSH
 ```sh
-git clone git@github.com:wawanjohi/chess-api.git
+git clone git@github.com:wawanjohi/chess-python.git
 ```
 or with Git CLI
 ```sh
-gh repo clone wawanjohi/chess-api
+gh repo clone wawanjohi/chess-python
 ```
 
 
