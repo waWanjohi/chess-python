@@ -95,8 +95,8 @@ class Game(models.Model):
 
     @property
     def moves_count(self):
-        return self.moves.all.count()
+        return self.moves.count()
 
     @property
     def captures_count(self):
-        return self.captures.all.count()
+        return self.captures.count()
